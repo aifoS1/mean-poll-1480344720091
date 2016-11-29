@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var db; 
 var mongo = process.env.VCAP_SERVICES;
-var port = process.env.PORT || 3030;
+var port = process.env.PORT || 6002;
 
 if (process.env.VCAP_SERVICES) {
    var env = JSON.parse(process.env.VCAP_SERVICES);
