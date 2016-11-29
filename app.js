@@ -12,6 +12,7 @@ var http = require('http');
 var path = require('path');
 var bodyParser = require('body-parser')
 var methodOverride = require('method-override')
+var logger = require('morgan');
 
 // cfenv provides access to your Cloud Foundry environment
 // for more info, see: https://www.npmjs.com/package/cfenv
@@ -29,6 +30,7 @@ app.use(methodOverride())
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.use(logger('dev'));
 
 // Handle Errors gracefully
 app.use(function(err, req, res, next) {
