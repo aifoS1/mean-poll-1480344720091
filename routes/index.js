@@ -1,5 +1,15 @@
 var mongoose = require('mongoose');
-var db = mongoose.createConnection('localhost', 'pollsapp');
+var db; 
+var mongo = process.env.VCAP_SERVICES;
+var port = process.env.PORT || 3030;
+
+if (process.env.VCAP_SERVICES) {
+   var env = JSON.parse(process.env.VCAP_SERVICES);
+   db = mongoose.createConnection(env['mongodb'][0]['credentials']);
+} else {
+   db = mongoose.createConnection('localhost', 'pollsapp');
+}
+
 var PollSchema = require('../models/Poll.js').PollSchema;
 var Poll = db.model('polls', PollSchema);
 exports.index = function(req, res) {
